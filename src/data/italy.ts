@@ -16,6 +16,11 @@ const L = {
   erc: { label: 'European Research Council', url: 'https://erc.europa.eu' },
   erasmusMundus: { label: 'Erasmus Mundus joint master catalogue', url: 'https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en' },
   interior: { label: 'Ministry of the Interior (residence permits)', url: 'https://www.interno.gov.it' },
+  circular: {
+    label: 'Official 2026/27 rules for international students (MUR circular, €10,179.85 proof of funds)',
+    url: 'https://www.unife.it/it/internazionale/venire/iscriversi/informazioni/circolare_2026-2027_studenti_internazionali.pdf',
+  },
+  yaounde: { label: 'Italian Embassy in Yaoundé (study visa, Cameroon)', url: 'https://ambyaounde.esteri.it' },
 };
 
 const fundingNeed = (a: Answers) => a.budget === 'full_funding';
@@ -31,6 +36,7 @@ const bachelor: Pathway = {
     'Proof of language level for the programme (often B2 English for English-taught degrees, or Italian for Italian-taught ones)',
     'Some programmes have an entrance test (for example medicine, architecture, or degrees with limited places)',
     'Non-EU applicants: pre-enrolment on Universitaly, then a study visa (type D)',
+    'Non-EU applicants: proof of at least €10,179.85 a year for living costs (2026/27 rules), plus money for the trip home. Embassies can ask for more or for a specific proof, such as a transfer to a bank account',
   ],
   costs:
     'Public universities set fees by family income, so many students pay from a few hundred to a few thousand euros a year. Private universities cost more. Living costs are roughly €700 to €1,200 a month depending on the city.',
@@ -53,7 +59,7 @@ const bachelor: Pathway = {
     'Apply for a DSU scholarship in the region of your university as soon as the call opens',
     'Get your visa, then apply for a residence permit within 8 days of arriving',
   ],
-  links: [L.universitaly, L.studyInItaly, L.cimea, L.visa],
+  links: [L.universitaly, L.circular, L.studyInItaly, L.yaounde, L.cimea, L.visa],
   assess(a) {
     const s = scorer();
     if (a.stage === 'bachelor') s.plus(45, "It matches the next step you're aiming for");
@@ -62,6 +68,7 @@ const bachelor: Pathway = {
     if (langRank[a.english] >= 2 || langRank[a.italian] >= 2) s.plus(10, 'Your language level fits English-taught or Italian-taught degrees');
     else s.minus(15, 'Most programmes expect at least B2 in the teaching language');
     if (a.budget !== 'self_funded') s.plus(5, 'Low public tuition and DSU scholarships help with a limited budget');
+    if (a.citizenship === 'non_eu' && a.budget !== 'self_funded') s.minus(5, 'For the visa you must prove €10,179.85 a year, unless a scholarship covers it');
     if (a.objective === 'teaching' && a.area === 'education') s.plus(5, 'Education degrees are a first step towards teaching');
     return s.done();
   },
@@ -78,6 +85,7 @@ const master: Pathway = {
     'Specific credits in core subjects, checked by each programme',
     'English B2 or higher for English-taught programmes (IELTS, TOEFL or similar)',
     'Non-EU applicants: pre-enrolment on Universitaly, then a study visa (type D)',
+    'Non-EU applicants: proof of at least €10,179.85 a year for living costs (2026/27 rules), plus money for the trip home. Embassies can ask for more or for a specific proof, such as a transfer to a bank account',
   ],
   costs:
     'Public universities set fees by family income, often from a few hundred to a few thousand euros a year. Living costs are roughly €700 to €1,200 a month depending on the city.',
@@ -101,7 +109,7 @@ const master: Pathway = {
     'Apply for DSU funding as soon as the regional call opens',
     'Pre-enrol on Universitaly and book your visa appointment early',
   ],
-  links: [L.universitaly, L.studyInItaly, L.erasmusMundus, L.cimea, L.visa],
+  links: [L.universitaly, L.circular, L.studyInItaly, L.yaounde, L.erasmusMundus, L.cimea, L.visa],
   assess(a) {
     const s = scorer();
     if (a.stage === 'master') s.plus(45, "It matches the next step you're aiming for");
@@ -115,6 +123,7 @@ const master: Pathway = {
     else s.minus(15, 'You will need B2 English or Italian before applying');
     if (a.objective === 'academic_career' || a.objective === 'industry_research') s.plus(5, 'A master’s leads directly to research roles and PhD programmes');
     if (fundingNeed(a)) s.minus(5, 'Full funding is competitive; apply early and to several scholarship schemes');
+    if (a.citizenship === 'non_eu' && a.budget !== 'self_funded') s.minus(5, 'For the visa you must prove €10,179.85 a year, unless a scholarship covers it');
     return s.done();
   },
 };
@@ -384,7 +393,8 @@ export const italy: Country = {
       'Get a tax code (codice fiscale) and register with the national health service.',
     ],
     non_eu: [
-      'Students: a study visa (type D) after university admission and pre-enrolment on Universitaly. You must show health insurance, accommodation, and financial means set each year (recently a little over €6,000 a year).',
+      'Students: a study visa (type D) after university admission and pre-enrolment on Universitaly. You must show health insurance and accommodation.',
+      'Money: for 2026/27 you must prove at least €10,179.85 for each year of study, up from about €6,000 before, plus enough for the trip home. A scholarship certificate counts. Each embassy decides what proof it accepts and can ask for more; in Cameroon, for example, the embassy asks for a bank certificate showing an irrevocable transfer to a bank account. Check your embassy before you apply.',
       'Researchers: a research visa based on a hosting agreement with an accredited institution, outside the yearly quotas.',
       'Highly qualified workers: the EU Blue Card, with a job offer above a salary threshold.',
       'Within 8 days of arrival, apply for a residence permit (permesso di soggiorno), usually through the post office kit.',

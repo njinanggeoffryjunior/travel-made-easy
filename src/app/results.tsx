@@ -104,6 +104,12 @@ export default function Results() {
       <Card>
         <Bullets items={country.visa[answers.citizenship]} />
         <ExternalLink label="Check the official visa finder" url="https://vistoperitalia.esteri.it" />
+        {answers.citizenship === 'non_eu' ? (
+          <ExternalLink
+            label="Official 2026/27 rules for international students"
+            url="https://www.unife.it/it/internazionale/venire/iscriversi/informazioni/circolare_2026-2027_studenti_internazionali.pdf"
+          />
+        ) : null}
       </Card>
 
       <H2>Places to look at</H2>
