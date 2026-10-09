@@ -1,4 +1,6 @@
-# Travel Made Easy
+# Wakavanti
+
+The name joins "waka" (to go, in the Pidgin spoken in Cameroon, Nigeria and Ghana) and "avanti" (forward, in Italian): go forward.
 
 Aim to help people around the world to find out what is best for them in Italy in terms of education or research.
 First version: Italy, field education and research. One Expo (React Native) codebase runs on web, iOS and Android.

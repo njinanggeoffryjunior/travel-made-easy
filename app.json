@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Travel Made Easy",
-    "slug": "travel-made-easy",
+    "name": "Wakavanti",
+    "slug": "wakavanti",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,7 @@
       "output": "single",
       "bundler": "metro"
     },
-    "scheme": "travelmadeeasy",
+    "scheme": "wakavanti",
     "plugins": [
       "expo-router"
     ],

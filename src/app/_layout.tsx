@@ -14,7 +14,7 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: colors.bg },
         }}
       >
-        <Stack.Screen name="index" options={{ title: 'Travel Made Easy' }} />
+        <Stack.Screen name="index" options={{ title: 'Wakavanti' }} />
         <Stack.Screen name="quiz" options={{ title: 'Your profile' }} />
         <Stack.Screen name="results" options={{ title: 'Your recommendation' }} />
         <Stack.Screen name="pathway/[id]" options={{ title: 'Pathway' }} />
