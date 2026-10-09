@@ -26,6 +26,9 @@
     "scheme": "travelmadeeasy",
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "experiments": {
+      "baseUrl": "/travel-made-easy"
+    }
   }
 }

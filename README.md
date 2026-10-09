@@ -3,6 +3,8 @@
 Aim to help people around the world to find out what is best for them in Italy in terms of education or research.
 First version: Italy, field education and research. One Expo (React Native) codebase runs on web, iOS and Android.
 
+Live site: https://njinanggeoffryjunior.github.io/travel-made-easy/ (updates automatically on every push to `main`).
+
 ## Run it
 
 ```bash
